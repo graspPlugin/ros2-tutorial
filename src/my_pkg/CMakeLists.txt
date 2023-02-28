@@ -56,6 +56,9 @@ ament_target_dependencies(hello_ros_world rclcpp)
 add_executable(simple_node src/simple_node.cpp)
 ament_target_dependencies(simple_node rclcpp)
 
+# class test
+add_executable(class_test src/class_test.cpp)
+
 # timer
 add_executable(timer src/timer.cpp)
 ament_target_dependencies(timer rclcpp)
@@ -69,6 +72,7 @@ install(
   TARGETS
   hello_world
   hello_ros_world
+  class_test
   simple_node
   timer
   publisher
