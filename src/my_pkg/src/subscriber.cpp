@@ -19,7 +19,6 @@ public:
     }
 
 private:
-    // subscriber
     rclcpp::Subscription<my_pkg::msg::Str>::SharedPtr subscription_;
     void StrSubCallback(my_pkg::msg::Str::SharedPtr msg);
 };
