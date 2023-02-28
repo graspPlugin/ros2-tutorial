@@ -9,8 +9,6 @@ public:
         : rclcpp::Node(node_name) {
         RCLCPP_INFO(get_logger(), "constructor called");
 
-        counter_ = 0;
-
         // timer
         timer_base_ = create_wall_timer(500ms, std::bind(&Publisher::TimerCallback, this));
 
@@ -23,8 +21,6 @@ public:
     }
 
 private:
-    size_t counter_;
-
     // timer
     rclcpp::TimerBase::SharedPtr timer_base_;
     void TimerCallback();
@@ -34,8 +30,9 @@ private:
 };
 
 void Publisher::TimerCallback() {
+    static size_t counter = 0;
     my_pkg::msg::Str message;
-    message.data = "msg " + std::to_string(++counter_);
+    message.data = "msg " + std::to_string(++counter);
     RCLCPP_INFO(get_logger(), "publish message : %s", message.data.c_str());
     publisher_->publish(message);
 }
@@ -43,8 +40,8 @@ void Publisher::TimerCallback() {
 int main(int argc, char* argv[]) {
     rclcpp::init(argc, argv);
 
-    auto simple_node = std::make_shared<Publisher>("publisher");
-    rclcpp::spin(simple_node);
+    auto publisher = std::make_shared<Publisher>("publisher");
+    rclcpp::spin(publisher);
 
     rclcpp::shutdown();
     return 0;

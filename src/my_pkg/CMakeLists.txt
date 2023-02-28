@@ -68,6 +68,11 @@ add_executable(publisher src/publisher.cpp)
 ament_target_dependencies(publisher rclcpp)
 rosidl_target_interfaces(publisher ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
+# subscriber
+add_executable(subscriber src/subscriber.cpp)
+ament_target_dependencies(subscriber rclcpp)
+rosidl_target_interfaces(subscriber ${PROJECT_NAME} "rosidl_typesupport_cpp")
+
 install(
   TARGETS
   hello_world
@@ -76,5 +81,6 @@ install(
   simple_node
   timer
   publisher
+  subscriber
   DESTINATION lib/${PROJECT_NAME}
 )
