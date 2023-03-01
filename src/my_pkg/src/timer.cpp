@@ -28,8 +28,8 @@ void Timer::TimerCallback() {
 int main(int argc, char* argv[]) {
     rclcpp::init(argc, argv);
 
-    auto simple_node = std::make_shared<Timer>("simple_node");
-    rclcpp::spin(simple_node);
+    auto timer = std::make_shared<Timer>("timer");
+    rclcpp::spin(timer);
 
     rclcpp::shutdown();
     return 0;
