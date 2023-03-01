@@ -2,21 +2,22 @@
 
 class SimpleNode : public rclcpp::Node {
 public:
-  SimpleNode(std::string node_name) : rclcpp::Node(node_name) {
-    RCLCPP_INFO(get_logger(), "constructor called");
-  }
+    SimpleNode(std::string node_name)
+        : rclcpp::Node(node_name) {
+        RCLCPP_INFO(get_logger(), "constructor called");
+    }
 
-  ~SimpleNode(){
-    RCLCPP_INFO(get_logger(), "deconstructor called");
-  }
+    ~SimpleNode() {
+        RCLCPP_INFO(get_logger(), "deconstructor called");
+    }
 };
 
-int main(int argc, char *argv[]) {
-  rclcpp::init(argc, argv);
+int main(int argc, char* argv[]) {
+    rclcpp::init(argc, argv);
 
-  auto simple_node = std::make_shared<SimpleNode>("simple_node");
-  rclcpp::spin(simple_node);
+    auto simple_node = std::make_shared<SimpleNode>("simple_node");
+    rclcpp::spin(simple_node);
 
-  rclcpp::shutdown();
-  return 0;
+    rclcpp::shutdown();
+    return 0;
 }
