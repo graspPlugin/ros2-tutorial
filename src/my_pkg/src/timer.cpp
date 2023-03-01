@@ -8,7 +8,6 @@ public:
         : rclcpp::Node(node_name) {
         RCLCPP_INFO(get_logger(), "constructor called");
 
-        timer_count_ = 0;
         timer_base_ = create_wall_timer(500ms, std::bind(&Timer::TimerCallback, this));
     }
 
@@ -17,13 +16,13 @@ public:
     }
 
 private:
-    size_t timer_count_;
     rclcpp::TimerBase::SharedPtr timer_base_;
     void TimerCallback();
 };
 
 void Timer::TimerCallback() {
-    RCLCPP_INFO(get_logger(), "timer callback %ld", ++timer_count_);
+    static size_t counter = 0;
+    RCLCPP_INFO(get_logger(), "timer callback %03ld", ++counter);
 }
 
 int main(int argc, char* argv[]) {
