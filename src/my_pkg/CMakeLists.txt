@@ -49,7 +49,7 @@ ament_target_dependencies(timer rclcpp)
 
 # publisher
 add_executable(publisher src/publisher.cpp)
-ament_target_dependencies(publisher rclcpp)
+ament_target_dependencies(publisher rclcpp std_msgs)
 
 install(
   TARGETS
