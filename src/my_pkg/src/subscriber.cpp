@@ -1,8 +1,6 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
 
-using namespace std::chrono_literals;
-
 class Subscriber : public rclcpp::Node {
 public:
     Subscriber(std::string node_name)
