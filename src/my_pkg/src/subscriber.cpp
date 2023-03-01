@@ -2,7 +2,6 @@
 #include <std_msgs/msg/string.hpp>
 
 using namespace std::chrono_literals;
-using std::placeholders::_1;
 
 class Subscriber : public rclcpp::Node {
 public:
@@ -10,7 +9,7 @@ public:
         : rclcpp::Node(node_name) {
         RCLCPP_INFO(get_logger(), "constructor called");
 
-        subscription_ = create_subscription<std_msgs::msg::String>("my_chatter", 10, std::bind(&Subscriber::SubMsgCallback, this, _1));
+        subscription_ = create_subscription<std_msgs::msg::String>("my_chatter", 10, std::bind(&Subscriber::SubMsgCallback, this, std::placeholders::_1));
     }
 
     ~Subscriber() {
