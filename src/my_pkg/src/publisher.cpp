@@ -9,11 +9,8 @@ public:
         : rclcpp::Node(node_name) {
         RCLCPP_INFO(get_logger(), "constructor called");
 
-        // timer
         timer_base_ = create_wall_timer(500ms, std::bind(&Publisher::TimerCallback, this));
-
-        // publisher
-        publisher_ = create_publisher<std_msgs::msg::String>("my_chatter", 10);
+        publisher_ = create_publisher<std_msgs::msg::String>("/my_chatter", 10);
     }
 
     ~Publisher() {
@@ -24,17 +21,17 @@ private:
     // timer
     rclcpp::TimerBase::SharedPtr timer_base_;
     void TimerCallback();
-
     // publisher
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
 };
 
 void Publisher::TimerCallback() {
     static size_t counter = 0;
-    std_msgs::msg::String message;
-    message.data = "Hello World: " + std::to_string(++counter);
-    RCLCPP_INFO(get_logger(), "Publishing : %s", message.data.c_str());
-    publisher_->publish(message);
+    std_msgs::msg::String msg;
+    msg.data = "Hello World: " + std::to_string(++counter);
+    publisher_->publish(msg);
+
+    RCLCPP_INFO(get_logger(), "Publishing: '%s'", msg.data.c_str());
 }
 
 int main(int argc, char* argv[]) {

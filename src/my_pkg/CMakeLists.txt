@@ -51,6 +51,10 @@ ament_target_dependencies(timer rclcpp)
 add_executable(publisher src/publisher.cpp)
 ament_target_dependencies(publisher rclcpp std_msgs)
 
+# subscriber
+add_executable(subscriber src/subscriber.cpp)
+ament_target_dependencies(subscriber rclcpp std_msgs)
+
 install(
   TARGETS
   hello_world
