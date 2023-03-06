@@ -16,50 +16,39 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 # find dependencies
-find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # uncomment the line when a copyright and license is not present in all source files
-  #set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # uncomment the line when this package is not in a git repo
-  #set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
-
-ament_package()
+# custom interface
+set(msg_files
+  "msg/SampleMsg.msg"
+)
+set(srv_files
+  "srv/SampleSrv.srv"
+)
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${msg_files}
+  ${srv_files}
+)
+ament_export_dependencies(rosidl_default_runtime)
 
 # hello world by c++ std library
-add_executable(hello_world src/hello_world.cpp)
+ament_auto_add_executable(hello_world src/hello_world.cpp)
 
 # simple node
-add_executable(simple_node src/simple_node.cpp)
-ament_target_dependencies(simple_node rclcpp)
+ament_auto_add_executable(simple_node src/simple_node.cpp)
 
 # timer
-add_executable(timer src/timer.cpp)
-ament_target_dependencies(timer rclcpp)
+ament_auto_add_executable(timer src/timer.cpp)
 
 # publisher
-add_executable(publisher src/publisher.cpp)
-ament_target_dependencies(publisher rclcpp std_msgs)
+ament_auto_add_executable(publisher src/publisher.cpp)
 
 # subscriber
-add_executable(subscriber src/subscriber.cpp)
-ament_target_dependencies(subscriber rclcpp std_msgs)
+ament_auto_add_executable(subscriber src/subscriber.cpp)
 
-install(
-  TARGETS
-  hello_world
-  simple_node
-  timer
-  publisher
-  DESTINATION lib/${PROJECT_NAME}
-)
+# sample msg publisher
+# add_executable(sample_msg_publisher src/sample_msg_publisher.cpp)
+# ament_target_dependencies(sample_msg_publisher rclcpp std_msgs)
+
+ament_auto_package()

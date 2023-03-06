@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>my_pkg</name>
+  <name>my_pkg2</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="buran5884@gmail.com">robotlab</maintainer>
@@ -12,12 +12,9 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
-  <depend>rosidl_default_generators</depend>
-  <depend>rosidl_default_runtime</depend>
-  <member_of_group>rosidl_interface_packages</member_of_group>
-
   <depend>rclcpp</depend>
   <depend>std_msgs</depend>
+  <depend>my_pkg</depend>
 
   <export>
     <build_type>ament_cmake</build_type>
