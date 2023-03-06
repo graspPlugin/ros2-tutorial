@@ -32,6 +32,11 @@ void Publisher::TimerCallback() {
     msg.str_data2 = "Hello World2: " + std::to_string(counter);
     msg.int_data = counter;
     publisher_->publish(msg);
+
+    RCLCPP_INFO(get_logger(), "Publishing str_data1 :'%s'", msg.str_data1.c_str());
+    RCLCPP_INFO(get_logger(), "Publishing str_data2 :'%s'", msg.str_data2.c_str());
+    RCLCPP_INFO(get_logger(), "Publishing  int data :'%d'", msg.int_data);
+    RCLCPP_INFO(get_logger(), "---");
     counter++;
 }
 

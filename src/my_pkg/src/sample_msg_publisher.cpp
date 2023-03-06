@@ -1,6 +1,5 @@
 #include <rclcpp/rclcpp.hpp>
-#include <std_msgs/msg/string.hpp>
-// #include <my_pkg/msg/sample_msg.hpp>
+#include <my_pkg/msg/sample_msg.hpp>
 
 using namespace std::chrono_literals;
 
@@ -11,7 +10,7 @@ public:
         RCLCPP_INFO(get_logger(), "constructor called");
 
         timer_base_ = create_wall_timer(500ms, std::bind(&Publisher::TimerCallback, this));
-        publisher_ = create_publisher<std_msgs::msg::String>("my_chatter", 10);
+        publisher_ = create_publisher<my_pkg::msg::SampleMsg>("sample_msg", 10);
     }
 
     ~Publisher() {
@@ -23,16 +22,22 @@ private:
     rclcpp::TimerBase::SharedPtr timer_base_;
     void TimerCallback();
     // publisher
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
+    rclcpp::Publisher<my_pkg::msg::SampleMsg>::SharedPtr publisher_;
 };
 
 void Publisher::TimerCallback() {
     static size_t counter = 0;
-    std_msgs::msg::String msg;
-    msg.data = "Hello World: " + std::to_string(++counter);
+    my_pkg::msg::SampleMsg msg;
+    msg.str_data1 = "Hello World1: " + std::to_string(counter);
+    msg.str_data2 = "Hello World2: " + std::to_string(counter);
+    msg.int_data = counter;
     publisher_->publish(msg);
 
-    RCLCPP_INFO(get_logger(), "Publishing: '%s'", msg.data.c_str());
+    RCLCPP_INFO(get_logger(), "Publishing str_data1 :'%s'", msg.str_data1.c_str());
+    RCLCPP_INFO(get_logger(), "Publishing str_data2 :'%s'", msg.str_data2.c_str());
+    RCLCPP_INFO(get_logger(), "Publishing  int data :'%d'", msg.int_data);
+    RCLCPP_INFO(get_logger(), "---");
+    counter++;
 }
 
 int main(int argc, char* argv[]) {

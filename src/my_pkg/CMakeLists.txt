@@ -48,7 +48,7 @@ ament_auto_add_executable(publisher src/publisher.cpp)
 ament_auto_add_executable(subscriber src/subscriber.cpp)
 
 # sample msg publisher
-# add_executable(sample_msg_publisher src/sample_msg_publisher.cpp)
-# ament_target_dependencies(sample_msg_publisher rclcpp std_msgs)
+ament_auto_add_executable(sample_msg_publisher src/sample_msg_publisher.cpp)
+rosidl_target_interfaces(sample_msg_publisher ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 ament_auto_package()
