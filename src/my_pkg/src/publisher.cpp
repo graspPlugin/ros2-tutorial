@@ -10,7 +10,7 @@ public:
         RCLCPP_INFO(get_logger(), "constructor called");
 
         timer_base_ = create_wall_timer(500ms, std::bind(&Publisher::TimerCallback, this));
-        publisher_ = create_publisher<std_msgs::msg::String>("/my_chatter", 10);
+        publisher_ = create_publisher<std_msgs::msg::String>("my_chatter", 10);
     }
 
     ~Publisher() {
