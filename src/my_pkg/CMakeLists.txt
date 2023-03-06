@@ -21,16 +21,7 @@ find_package(ament_cmake REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
-
-# custom message
-set(msg_files
-  "msg/Str.msg"
-)
-rosidl_generate_interfaces(${PROJECT_NAME}
-  ${msg_files}
-)
-ament_export_dependencies(rosidl_default_runtime)
+find_package(std_msgs REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -48,16 +39,9 @@ ament_package()
 # hello world by c++ std library
 add_executable(hello_world src/hello_world.cpp)
 
-# hello world by ros node
-add_executable(hello_ros_world src/hello_ros_world.cpp)
-ament_target_dependencies(hello_ros_world rclcpp)
-
 # simple node
 add_executable(simple_node src/simple_node.cpp)
 ament_target_dependencies(simple_node rclcpp)
-
-# class test
-add_executable(class_test src/class_test.cpp)
 
 # timer
 add_executable(timer src/timer.cpp)
@@ -65,22 +49,13 @@ ament_target_dependencies(timer rclcpp)
 
 # publisher
 add_executable(publisher src/publisher.cpp)
-ament_target_dependencies(publisher rclcpp)
-rosidl_target_interfaces(publisher ${PROJECT_NAME} "rosidl_typesupport_cpp")
-
-# subscriber
-add_executable(subscriber src/subscriber.cpp)
-ament_target_dependencies(subscriber rclcpp)
-rosidl_target_interfaces(subscriber ${PROJECT_NAME} "rosidl_typesupport_cpp")
+ament_target_dependencies(publisher rclcpp std_msgs)
 
 install(
   TARGETS
   hello_world
-  hello_ros_world
-  class_test
   simple_node
   timer
   publisher
-  subscriber
   DESTINATION lib/${PROJECT_NAME}
 )

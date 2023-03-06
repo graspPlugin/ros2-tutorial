@@ -1,5 +1,5 @@
 #include <rclcpp/rclcpp.hpp>
-#include <my_pkg/msg/str.hpp>
+#include <std_msgs/msg/string.hpp>
 
 using namespace std::chrono_literals;
 
@@ -13,7 +13,7 @@ public:
         timer_base_ = create_wall_timer(500ms, std::bind(&Publisher::TimerCallback, this));
 
         // publisher
-        publisher_ = create_publisher<my_pkg::msg::Str>("str", 10);
+        publisher_ = create_publisher<std_msgs::msg::String>("my_chatter", 10);
     }
 
     ~Publisher() {
@@ -26,14 +26,14 @@ private:
     void TimerCallback();
 
     // publisher
-    rclcpp::Publisher<my_pkg::msg::Str>::SharedPtr publisher_;
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
 };
 
 void Publisher::TimerCallback() {
     static size_t counter = 0;
-    my_pkg::msg::Str message;
-    message.data = "msg " + std::to_string(++counter);
-    RCLCPP_INFO(get_logger(), "publish message : %s", message.data.c_str());
+    std_msgs::msg::String message;
+    message.data = "Hello World: " + std::to_string(++counter);
+    RCLCPP_INFO(get_logger(), "Publishing : %s", message.data.c_str());
     publisher_->publish(message);
 }
 
