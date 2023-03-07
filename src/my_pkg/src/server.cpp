@@ -24,12 +24,12 @@ private:
 void Server::SampleSrvCallback(const std::shared_ptr<my_pkg::srv::SampleSrv::Request> request,
     std::shared_ptr<my_pkg::srv::SampleSrv::Response> response) {
     RCLCPP_INFO(get_logger(), "Receive request");
-    RCLCPP_INFO(get_logger(), "  -> f32_data1 = %f", request->f32_data1);
-    RCLCPP_INFO(get_logger(), "  -> f32_data2 = %f", request->f32_data2);
+    RCLCPP_INFO(get_logger(), "  -> f32_1 = %f", request->f32_1);
+    RCLCPP_INFO(get_logger(), "  -> f32_2 = %f", request->f32_2);
 
-    response->f32_data = request->f32_data1 + request->f32_data2;
+    response->f32 = request->f32_1 + request->f32_2;
     RCLCPP_INFO(get_logger(), "Send response");
-    RCLCPP_INFO(get_logger(), "  -> f32_data = %f", response->f32_data);
+    RCLCPP_INFO(get_logger(), "  -> f32 = %f", response->f32);
     RCLCPP_INFO(get_logger(), "---");
 }
 

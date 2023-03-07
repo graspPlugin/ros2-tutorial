@@ -1,4 +1,4 @@
-float32 f32_data1
-float32 f32_data2
+float32 f32_1
+float32 f32_2
 ---
-float32 f32_data
+float32 f32
