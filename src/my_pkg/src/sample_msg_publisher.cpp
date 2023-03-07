@@ -28,14 +28,14 @@ private:
 void Publisher::TimerCallback() {
     static size_t counter = 0;
     my_pkg::msg::SampleMsg msg;
-    msg.str_data1 = "Hello World1: " + std::to_string(counter);
-    msg.str_data2 = "Hello World2: " + std::to_string(counter);
-    msg.int_data = counter;
+    msg.str_1 = "Hello World1: " + std::to_string(counter);
+    msg.str_2 = "Hello World2: " + std::to_string(counter);
+    msg.i = counter;
     publisher_->publish(msg);
 
-    RCLCPP_INFO(get_logger(), "Publishing str_data1 :'%s'", msg.str_data1.c_str());
-    RCLCPP_INFO(get_logger(), "Publishing str_data2 :'%s'", msg.str_data2.c_str());
-    RCLCPP_INFO(get_logger(), "Publishing  int data :'%d'", msg.int_data);
+    RCLCPP_INFO(get_logger(), "Publishing str_1 :'%s'", msg.str_1.c_str());
+    RCLCPP_INFO(get_logger(), "Publishing str_2 :'%s'", msg.str_2.c_str());
+    RCLCPP_INFO(get_logger(), "Publishing     i :'%d'", msg.i);
     RCLCPP_INFO(get_logger(), "---");
     counter++;
 }

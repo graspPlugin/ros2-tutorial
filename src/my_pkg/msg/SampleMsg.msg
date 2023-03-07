@@ -1,3 +1,3 @@
-string str_data1
-string str_data2
-int16 int_data
+string str_1
+string str_2
+int16 i
