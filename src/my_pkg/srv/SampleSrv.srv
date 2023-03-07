@@ -1,3 +1,4 @@
-int16 int16_data
+float32 f32_data1
+float32 f32_data2
 ---
-bool res
+float32 f32_data

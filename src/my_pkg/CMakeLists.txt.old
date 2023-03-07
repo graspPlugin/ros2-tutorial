@@ -38,45 +38,26 @@ add_executable(hello_world src/hello_world.cpp)
 
 # simple node
 add_executable(simple_node src/simple_node.cpp)
-ament_target_dependencies(simple_node rclcpp)
 
 # timer
 add_executable(timer src/timer.cpp)
-ament_target_dependencies(timer rclcpp)
 
 # publisher
 add_executable(publisher src/publisher.cpp)
-ament_target_dependencies(publisher rclcpp std_msgs)
 
 # subscriber
 add_executable(subscriber src/subscriber.cpp)
-ament_target_dependencies(subscriber rclcpp std_msgs)
 
 # sample msg publisher
 add_executable(sample_msg_publisher src/sample_msg_publisher.cpp)
-ament_target_dependencies(sample_msg_publisher rclcpp)
 rosidl_target_interfaces(sample_msg_publisher ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 # server
 add_executable(server src/server.cpp)
-ament_target_dependencies(server rclcpp)
 rosidl_target_interfaces(server ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
-# client
-add_executable(client src/client.cpp)
-ament_target_dependencies(client rclcpp)
-rosidl_target_interfaces(client ${PROJECT_NAME} "rosidl_typesupport_cpp")
-
 install(TARGETS
-  hello_world
-  simple_node
-  timer
-  publisher
-  subscriber
-  sample_msg_publisher
-  server
-  client
-  DESTINATION lib/${PROJECT_NAME}
+  DESTINATION lib/${PACKAGE_NAME}
 )
 
-ament_package()
+ament_auto_package()
